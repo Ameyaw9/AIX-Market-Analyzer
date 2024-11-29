@@ -1,0 +1,8 @@
+[console_scripts]
+b58 = pycoin.cmds.b58:main
+block = pycoin.cmds.block:main
+coinc = pycoin.cmds.coinc:main
+keychain = pycoin.cmds.keychain:main
+ku = pycoin.cmds.ku:main
+msg = pycoin.cmds.msg:main
+tx = pycoin.cmds.tx:main

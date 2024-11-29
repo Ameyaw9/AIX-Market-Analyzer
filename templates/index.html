@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AIX Market Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .navbar {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+            background-color: #2a2a2a;
+            color: white;
+        }
+        .token-section {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .plot-image {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Dashboard</a>
+        <a href="/tokens">Tokens</a>
+        <a href="/compare">Compare</a>
+        <a href="/reports">Reports</a>
+    </div>
+
+    <div class="hero">
+        <h1>AIX Market Analyzer</h1>
+        <p>Evaluate the growth potential of AI crypto tokens with data-driven insights and advanced analytics</p>
+    </div>
+
+    <div class="container">
+        <h2>Token Price Forecasts</h2>
+        
+        {% for token_name, data in results.items() %}
+        <div class="token-section">
+            <h3>{{ token_name }} Analysis</h3>
+            {% if plots[token_name] %}
+                <img class="plot-image" src="data:image/png;base64,{{ plots[token_name] }}" alt="{{ token_name }} forecast">
+            {% endif %}
+            
+            <div class="metrics">
+                <h4>Key Metrics</h4>
+                <p>Latest Prediction: {{ data.predictions[-1] if data.predictions else 'N/A' }}</p>
+                <p>Actual Value: {{ data.actual[-1] if data.actual else 'N/A' }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html> 

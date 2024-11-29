@@ -1,0 +1,827 @@
+{
+    "1": {
+        "events": {
+            "0x45e1ba9e71ec24a10adf9d3f8cf6c41c4452fcb51b8aa6850861243fb23f76f3": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "totalStakeAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "rewardAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "windowTotalStake",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "AddReward",
+                "type": "event"
+            },
+            "0x130a767201a559d9635c6afdc77cf5e05d56b3c77c8a28d17612339811fbdd07": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "totalAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "ClaimStake",
+                "type": "event"
+            },
+            "0xda12ee837e6978172aaf54b16145ffe08414fd8710092ef033c71b8eb6ec189a": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    }
+                ],
+                "name": "NewOperator",
+                "type": "event"
+            },
+            "0x3cb7acee6ab801e31828e4f68daeb2e43fbd717326fb7fd217cf4667db469248": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "startPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "endPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "approvalEndPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "rewardAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "OpenForStake",
+                "type": "event"
+            },
+            "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "previousOwner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "newOwner",
+                        "type": "address"
+                    }
+                ],
+                "name": "OwnershipTransferred",
+                "type": "event"
+            },
+            "0x59092d10fe8f9042482068413b6317974629719525544c31ca42e628a8f8a6b3": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "returnAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "RejectStake",
+                "type": "event"
+            },
+            "0xbf008b7793d9cf02deebfa7b5ddd88fd06dedd91a3ff0d223be738b27dc74d7f": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "bool",
+                        "name": "autoRenewal",
+                        "type": "bool"
+                    }
+                ],
+                "name": "RequestForClaim",
+                "type": "event"
+            },
+            "0x157efccb244e0e1ae7a36a1c28a1f45b62e1250e06e57d9cb44cc1cdc2d95d92": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "stakeAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "SubmitStake",
+                "type": "event"
+            },
+            "0x39b6a17fb76d0a81d196f43cf9767b8f8457f5ff1cf9f6a44a45df9cf2ee3002": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "stakeAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "WithdrawStake",
+                "type": "event"
+            },
+            "0x992ee874049a42cae0757a765cd7f641b6028cc35c3478bde8330bf417c3a7a9": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "WithdrawToken",
+                "type": "event"
+            }
+        },
+        "links": {},
+        "address": "0x13e1367A455C45Aa736D7Ff2C5656bA2bD05AD46",
+        "transactionHash": "0x0ed2933d724fd9172a7aca47a6568f28c14059e57d6974591ff08827e1f0687a"
+    },
+    "5": {
+        "events": {
+            "0x45e1ba9e71ec24a10adf9d3f8cf6c41c4452fcb51b8aa6850861243fb23f76f3": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "totalStakeAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "rewardAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "windowTotalStake",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "AddReward",
+                "type": "event"
+            },
+            "0x130a767201a559d9635c6afdc77cf5e05d56b3c77c8a28d17612339811fbdd07": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "totalAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "ClaimStake",
+                "type": "event"
+            },
+            "0xda12ee837e6978172aaf54b16145ffe08414fd8710092ef033c71b8eb6ec189a": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    }
+                ],
+                "name": "NewOperator",
+                "type": "event"
+            },
+            "0x3cb7acee6ab801e31828e4f68daeb2e43fbd717326fb7fd217cf4667db469248": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "startPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "endPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "approvalEndPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "rewardAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "OpenForStake",
+                "type": "event"
+            },
+            "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "previousOwner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "newOwner",
+                        "type": "address"
+                    }
+                ],
+                "name": "OwnershipTransferred",
+                "type": "event"
+            },
+            "0x59092d10fe8f9042482068413b6317974629719525544c31ca42e628a8f8a6b3": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "returnAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "RejectStake",
+                "type": "event"
+            },
+            "0xbf008b7793d9cf02deebfa7b5ddd88fd06dedd91a3ff0d223be738b27dc74d7f": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "bool",
+                        "name": "autoRenewal",
+                        "type": "bool"
+                    }
+                ],
+                "name": "RequestForClaim",
+                "type": "event"
+            },
+            "0x157efccb244e0e1ae7a36a1c28a1f45b62e1250e06e57d9cb44cc1cdc2d95d92": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "stakeAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "SubmitStake",
+                "type": "event"
+            },
+            "0x39b6a17fb76d0a81d196f43cf9767b8f8457f5ff1cf9f6a44a45df9cf2ee3002": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "stakeAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "WithdrawStake",
+                "type": "event"
+            },
+            "0x992ee874049a42cae0757a765cd7f641b6028cc35c3478bde8330bf417c3a7a9": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "WithdrawToken",
+                "type": "event"
+            }
+        },
+        "links": {},
+        "address": "0x3f6f82670c92f185d90efb77dd332156962febac",
+        "transactionHash": "0xd50c2b98a6f455b220e8fbc1a4979ea839041290c1b4382a1b4bc3c10f903f8c"
+    },
+    "11155111": {
+        "events": {
+            "0x45e1ba9e71ec24a10adf9d3f8cf6c41c4452fcb51b8aa6850861243fb23f76f3": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "totalStakeAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "rewardAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "windowTotalStake",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "AddReward",
+                "type": "event"
+            },
+            "0x130a767201a559d9635c6afdc77cf5e05d56b3c77c8a28d17612339811fbdd07": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "totalAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "ClaimStake",
+                "type": "event"
+            },
+            "0xda12ee837e6978172aaf54b16145ffe08414fd8710092ef033c71b8eb6ec189a": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    }
+                ],
+                "name": "NewOperator",
+                "type": "event"
+            },
+            "0x3cb7acee6ab801e31828e4f68daeb2e43fbd717326fb7fd217cf4667db469248": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "startPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "endPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "approvalEndPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "rewardAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "OpenForStake",
+                "type": "event"
+            },
+            "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "previousOwner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "newOwner",
+                        "type": "address"
+                    }
+                ],
+                "name": "OwnershipTransferred",
+                "type": "event"
+            },
+            "0x59092d10fe8f9042482068413b6317974629719525544c31ca42e628a8f8a6b3": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "returnAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "RejectStake",
+                "type": "event"
+            },
+            "0xbf008b7793d9cf02deebfa7b5ddd88fd06dedd91a3ff0d223be738b27dc74d7f": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "bool",
+                        "name": "autoRenewal",
+                        "type": "bool"
+                    }
+                ],
+                "name": "RequestForClaim",
+                "type": "event"
+            },
+            "0x157efccb244e0e1ae7a36a1c28a1f45b62e1250e06e57d9cb44cc1cdc2d95d92": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "stakeAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "SubmitStake",
+                "type": "event"
+            },
+            "0x39b6a17fb76d0a81d196f43cf9767b8f8457f5ff1cf9f6a44a45df9cf2ee3002": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "uint256",
+                        "name": "stakeIndex",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "staker",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "stakeAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "WithdrawStake",
+                "type": "event"
+            },
+            "0x992ee874049a42cae0757a765cd7f641b6028cc35c3478bde8330bf417c3a7a9": {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "tokenOperator",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "WithdrawToken",
+                "type": "event"
+            }
+        },
+        "links": {},
+        "address": "0x322D9306E119264A10D3eD6Ee4F6a0f5fa2395Fb",
+        "transactionHash": "0x74a558ee12f75753f3ce3d5fb20cbf285d864fa4648aeb342fc9c4567ed3445a"
+    }
+}

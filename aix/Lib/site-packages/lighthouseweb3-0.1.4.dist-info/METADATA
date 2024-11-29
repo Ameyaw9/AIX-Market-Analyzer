@@ -1,0 +1,79 @@
+Metadata-Version: 2.1
+Name: lighthouseweb3
+Version: 0.1.4
+Summary: Lighthouse Python SDK
+Home-page: https://github.com/lighthouse-web3/lighthouse-python-sdk
+Author: Ravish Sharma | Ayobami Oki | Nandit Mehra
+Author-email: nandit123@lighthouse.storage
+License: GNU GENERAL PUBLIC LICENSE
+Keywords: lighthouse storage sdk python filecoin ipfs web3 perpetual
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+Requires-Dist: requests
+
+# Lighthouse Python SDK
+
+Lighthouse is a permanent decentralized file storage protocol that allows the ability to pay once and store forever. While traditionally, users need to repeatedly keep track and pay for their storage after every fixed amount of time, Lighthouse manages this for them and makes sure that user files are stored forever. The aim is to move users from a rent-based cost model where they are renting their own files on cloud storage to a permanent ownership model. It is built on top of IPFS, Filecoin, and Polygon. It uses the existing miner network and storage capacity of the filecoin network.
+
+# Installation
+
+```
+pip install lighthouseweb3
+```
+
+# Usage
+
+### Instantiate the client
+
+```python
+from lighthouseweb3 import Lighthouse
+
+# use token from env variable LIGHTHOUSE_TOKEN
+lh = Lighthouse()
+
+# or you can pass token as parameter
+lh = Lighthouse(token="your_token")
+```
+
+### Uploading a file
+
+```python
+from lighthouseweb3 import Lighthouse
+lh = Lighthouse()
+response = lh.upload("path/to/file")
+print(response) # prints a dict containing the cid of the file
+```
+
+### Uploading a directory
+
+```python
+from lighthouseweb3 import Lighthouse
+lh = Lighthouse("my-lightouse-token")
+response = lh.upload("path/to/directory")
+print(response) # prints a dict containing the root cid of the directory
+```
+
+# Testing
+
+The tests are written with inheritance from the unittest module. To run the tests, run the following command:
+
+```
+pip install -r requirements.txt && python -m unittest discover
+```
+
+or using nose2
+
+```
+pip install -r requirements.txt && python -m nose2
+```

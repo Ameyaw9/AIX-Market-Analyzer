@@ -1,85 +1,79 @@
-from snet.sdk import SnetSDK
-import os
-import json
+from config import snet_sdk
+import pandas as pd
 
-class SnetConfig:
-    """Custom configuration class that implements required methods"""
-    def __init__(self, config_dict):
-        self._config = config_dict
-
-    def get_ipfs_endpoint(self):
-        return self._config['ipfs_endpoint']
-
-    def get_eth_rpc_endpoint(self):
-        return self._config['eth_rpc_endpoint']
-
-    def get_private_key(self):
-        return self._config['private_key']
-
-    def get(self, key, default=None):
-        return self._config.get(key, default)
-
-    # Make the class subscriptable
-    def __getitem__(self, key):
-        return self._config[key]
-
-    def __setitem__(self, key, value):
-        self._config[key] = value
-
-# Configuration dictionary
-config_dict = {
-    "private_key": os.getenv("SNET_PRIVATE_KEY", "private key here"),
-    "eth_rpc_endpoint": "https://mainnet.infura.io/v3/39b6ef5417ab4b9195aa5a34c2a4a134",
-    "ipfs_endpoint": "/ip4/ipfs.singularitynet.io/tcp/80",  # Updated IPFS endpoint format
-    "ipfs_timeout": 10,
-    "org_id": "26072b8b6a0e448180f8c0e702ab6d2f", 
-    "service_id": "Exampleservice", 
-    "group_name": "default_group",
-    "free_call_auth_token_bin": "f2548d27ffd319b9c05918eeac15ebab934e5cfcd68e1ec3db2b92765",
-    "free_call_token_expiry_block": 172800,
-    "email": "emmanuel97ameyaw@gmail.com"
-}
-
-class SnetAIClient:
+class AITokenService:
     def __init__(self):
-        try:
-            # Create config object with required methods
-            self.config = SnetConfig(config_dict)
-            # Initialize SDK with config object
-            self.sdk = SnetSDK(self.config)
-            print("SDK initialized successfully")
-        except Exception as e:
-            print(f"Error initializing SDK: {str(e)}")
-            raise
+        # Create service client for the example service
+        self.service_client = snet_sdk.create_service_client(
+            org_id="26072b8b6a0e448180f8c0e702ab6d2f",
+            service_id="Exampleservice",
+            group_name="default_group"
+        )
 
     def test_connection(self):
+        """Test the SDK connection with a simple calculation"""
         try:
-            # Create service client
-            service_client = self.sdk.create_service_client(
-                org_id=self.config['org_id'],
-                service_id=self.config['service_id'],
-                group_name=self.config['group_name']
+            result = self.service_client.call_rpc(
+                "add",
+                "Numbers",
+                a=10,
+                b=5
             )
-            print("Service client created successfully")
-            return service_client
+            print(f"Connection test successful. 10 + 5 = {result}")
+            return True
+        except Exception as e:
+            print(f"Connection test failed: {str(e)}")
+            return False
+
+    def process_token_data(self, token_file):
+        """Process token data using the service"""
+        try:
+            # Load token data
+            df = pd.read_csv(f'Tokens/{token_file}')
+            
+            # Get latest price and volume
+            latest_price = float(df['Close'].iloc[-1])
+            latest_volume = float(df['Volume'].iloc[-1])
+            
+            # Use the service to process data
+            result = self.service_client.call_rpc(
+                "mul",  # Example operation
+                "Numbers",
+                a=latest_price,
+                b=latest_volume
+            )
+            
+            return {
+                "token": token_file,
+                "calculation_result": result,
+                "latest_price": latest_price,
+                "latest_volume": latest_volume
+            }
             
         except Exception as e:
-            print(f"Error in test_connection: {str(e)}")
+            print(f"Error processing token data: {str(e)}")
             raise
 
 def main():
-    try:
-        print("\nInitializing SingularityNET client...")
-        client = SnetAIClient()
-        print("\nTesting connection...")
-        client.test_connection()
-        print("\nConnection test completed successfully")
+    # Initialize the service
+    ai_service = AITokenService()
+    
+    # Test the connection
+    if ai_service.test_connection():
+        print("SDK connection successful!")
         
-    except Exception as e:
-        print(f"\nError in main: {str(e)}")
-        print("\nDebug information:")
-        print(f"SNET_PRIVATE_KEY set: {'Yes' if os.getenv('SNET_PRIVATE_KEY') else 'No'}")
-        print(f"Config used: {json.dumps(config_dict, indent=2, default=str)}")
+        # Process each token
+        tokens = ['AGIX.csv', 'FET.csv', 'NEAR.csv', 'NMR.csv', 'OCEAN.csv', 'RNDR.csv']
+        
+        for token in tokens:
+            try:
+                result = ai_service.process_token_data(token)
+                print(f"\nProcessed {token}:")
+                print(f"Latest Price: {result['latest_price']}")
+                print(f"Latest Volume: {result['latest_volume']}")
+                print(f"Calculation Result: {result['calculation_result']}")
+            except Exception as e:
+                print(f"Error processing {token}: {str(e)}")
 
 if __name__ == "__main__":
     main()
