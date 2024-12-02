@@ -1,5 +1,4 @@
-# AIX-Market-Analyzer
-# AI Crypto Token Growth Forecasting
+# AIX-Market-Analyzer - AI Crypto Token Growth Forecasting
 # Overview
 This project aims to evaluate the growth potential of AI crypto tokens by analyzing their probabilistic market forecasts and extracting insights into individual growth trends. Using advanced machine learning models, including LSTM (Long Short-Term Memory networks) and the SingularityNET SDK, this analysis empowers individuals to make informed decisions about investing or participating in the AI blockchain ecosystem.
 
