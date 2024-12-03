@@ -13,7 +13,7 @@ app = FastAPI(title="Token Price Forecaster API")
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://aix-market-analyzer.vercel.app/"], # Frontend linked
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
